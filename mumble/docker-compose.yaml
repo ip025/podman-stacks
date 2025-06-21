@@ -1,0 +1,23 @@
+services:
+  mumble-server:
+    image: docker.io/mumblevoip/mumble-server:v1.5.634-2
+    hostname: mumble-server
+    # user: 9999:9999
+    restart: on-failure
+    ports:
+      - 64738:64738
+      - 64738:64738/udp
+    environment:
+      - MUMBLE_SUPERUSER_PASSWORD=${MUMBLE_SUPERUSER_PASSWORD}
+      - MUMBLE_CONFIG_OPUSTHRESHOLD=0
+      - MUMBLE_CONFIG_MESSAGEBURST=1
+      - MUMBLE_CONFIG_MESSAGELIMIT=1
+      - MUMBLE_CONFIG_USERS=100
+      - MUMBLE_CONFIG_BANDWIDTH=558000
+      # - MUMBLE_CONFIG_WELCOMETEXT="<br />Welcome to this server running <b>Mumble</b>.<br />Enjoy your stay!<br />"
+      # - MUMBLE_CONFIG_SSLCERT=/data/fullchain.pem
+      # - MUMBLE_CONFIG_SSLKEY=/data/privkey.pem
+      # - MUMBLE_UID=9999
+      # - MUMBLE_GID=9999
+    volumes:
+      - /mumble-root:/data
