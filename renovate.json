@@ -4,6 +4,5 @@
   ],
   "enabledManagers": [
     "docker-compose"
-  ],
-  "autodiscover": true
+  ]
 }
