@@ -1,4 +1,9 @@
 {
-  "extends": ["config:base"],
-  "enabledManagers": ["docker-compose"]
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    "docker-compose"
+  ],
+  "autodiscover": true
 }
