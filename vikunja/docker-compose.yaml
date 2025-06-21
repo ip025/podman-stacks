@@ -2,7 +2,7 @@ version: '3'
 
 services:
   vikunja:
-    image: docker.io/vikunja/vikunja:v0.24.6
+    image: docker.io/vikunja/vikunja:0.24.6
     environment:
       VIKUNJA_SERVICE_PUBLICURL: ${PUBLIC_URL}
       VIKUNJA_DATABASE_TYPE: mysql
