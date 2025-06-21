@@ -1,0 +1,23 @@
+services:
+  memos:
+    image: docker.io/neosmemo/memos:0.24.4
+    container_name: memos
+    volumes:
+      - data:/var/opt/memos
+    ports:
+      - 100.66.111.120:5230:5230
+  
+  tunnel:
+    image: docker.io/cloudflare/cloudflared:2025.6.0
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "128M"
+
+volumes:
+  data:
