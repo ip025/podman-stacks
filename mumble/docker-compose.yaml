@@ -1,6 +1,6 @@
 services:
   mumble-server:
-    image: docker.io/mumblevoip/mumble-server:v1.5.634-2
+    image: docker.io/mumblevoip/mumble-server:v1.5.735-2
     hostname: mumble-server
     # user: 9999:9999
     restart: on-failure
