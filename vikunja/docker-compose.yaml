@@ -16,15 +16,16 @@ services:
       - 3456:3456
     volumes:
       - files:/app/vikunja/files
-    depends_on:
-      vikunja-mysql:
-        condition: service_healthy
-      vikunja-redis:
-        condition: service_healthy
+    # depends_on:
+    #   vikunja-mysql:
+    #     condition: service_healthy
+    #   vikunja-redis:
+    #     condition: service_healthy
+    restart: always
 
   tunnel:
     image: docker.io/cloudflare/cloudflared:2025.6.1
-    restart: unless-stopped
+    restart: always
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
