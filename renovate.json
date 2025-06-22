@@ -12,7 +12,7 @@
     {
       "matchDatasources": ["docker-compose"],
       "matchPackageNames": ["docker.io/library/mariadb"],
-      "allowedVersions": ">=11 <12",
+      "allowedVersions": "<= 11.0.0",
       "description": "Keep MariaDB on version 11.x"
     }
   ]
