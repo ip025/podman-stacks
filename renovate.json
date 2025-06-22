@@ -4,5 +4,8 @@
   ],
   "enabledManagers": [
     "docker-compose"
+  ],
+  "assignees": [
+    "ip025"
   ]
 }
