@@ -9,11 +9,6 @@
     "ip025"
   ],
   "packageRules": [
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["docker.io/library/mariadb"],
-      "allowedVersions": "< 12.0.0-ubi",
-      "description": "Keep MariaDB on version 11.x"
-    }
+    {}
   ]
 }
