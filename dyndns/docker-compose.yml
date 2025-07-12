@@ -3,3 +3,8 @@ services:
   cloudflare-ddns:
     image: oznu/cloudflare-ddns:latest
     restart: always
+    environment:
+      API_KEY: ${API_KEY}
+      ZONE: ${ZONE}
+      SUBDOMAIN: ${SUBDOMAIN}
+      PROXIED: ${PROXIED}
