@@ -4,10 +4,10 @@ services:
     ports:
       - 13379:80
     volumes:
-      - ./audiobooks:/audiobooks
-      - ./podcasts:/podcasts
-      - ./config:/config
-      - ./metadata:/metadata
+      - ${AUDIOBOOK_FOLDER_PATH}:/audiobooks
+      - ${PODCASTS_FOLDER_PATH}:/podcasts
+      - ${CONFIG_FOLDER_PATH}:/config
+      - ${METADATA_FOLDER_PATH}:/metadata
     environment:
       - TZ=Europe/Berlin
 
