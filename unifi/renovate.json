@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "docker-compose": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Keep MongoDB at version 4.x",
+      "matchPackageNames": [
+        "mongo",
+        "docker.io/mongo"
+      ],
+      "allowedVersions": "4.x"
+    }
+  ]
+}
