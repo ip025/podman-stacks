@@ -13,7 +13,7 @@
         "mongo",
         "docker.io/mongo"
       ],
-      "allowedVersions": "4.x"
+      "allowedVersions": "<=5"
     }
   ]
 }
