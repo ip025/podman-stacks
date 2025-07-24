@@ -6,6 +6,7 @@ services:
       REPO_URL: ${REPO_URL}
       RUNNER_NAME: ${RUNNER_NAME}
       RUNNER_TOKEN: ${RUNNER_TOKEN}
+      RUNNER_SCOPE: repo
       RUNNER_WORKDIR: /tmp/runner/work
       CONFIGURED_ACTIONS_RUNNER_FILES_DIR: /runner/data # Required for persistence
       RUNNER_SCOPE: 'repo'
