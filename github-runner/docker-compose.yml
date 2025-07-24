@@ -14,7 +14,7 @@ services:
       # needed on SELinux systems to allow docker container to manage other docker containers
       - label:disable
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/run/podman/podman.sock:/var/run/docker.sock'
       - '/runner/data:/runner/data' # required for persistence
       - '/tmp/runner:/tmp/runner'
       # note: a quirk of docker-in-docker is that this path
