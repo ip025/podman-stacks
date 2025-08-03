@@ -18,3 +18,15 @@ services:
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
     restart: unless-stopped
+
+  tunnel:
+    image: docker.io/cloudflare/cloudflared:2025.7.0
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "1G"
