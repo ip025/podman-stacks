@@ -15,7 +15,7 @@
         "unifi/**"
       ],
       "matchDatasources": [
-        "docker"
+        "docker-compose"
       ],
       "matchPackageNames": [
         "mongo"
