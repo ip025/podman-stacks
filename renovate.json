@@ -10,12 +10,15 @@
   ],
   "packageRules": [
     {
-      "description": "Keep MariaDB in unifi stack within major v4",
-      "matchPaths": [
-        "unifi/**"
+      "description": "Keep Mongo within major v4 in unifi stack",
+      "matchManagers": [
+        "docker-compose"
       ],
       "matchDatasources": [
-        "docker-compose"
+        "docker"
+      ],
+      "matchPaths": [
+        "unifi/**"
       ],
       "matchPackageNames": [
         "mongo"
