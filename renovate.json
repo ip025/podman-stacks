@@ -9,6 +9,18 @@
     "ip025"
   ],
   "packageRules": [
-    {}
+    {
+      "description": "Keep MariaDB in unifi stack within major v4",
+      "matchPaths": [
+        "unifi/**"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "mongo"
+      ],
+      "allowedVersions": "<5.0.0"
+    }
   ]
 }
