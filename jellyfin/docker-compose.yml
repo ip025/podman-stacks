@@ -1,7 +1,7 @@
 ---
 services:
   jellyfin:
-    image: quay.io/linuxserver.io/jellyfin:10.10.6
+    image: quay.io/linuxserver.io/jellyfin:10.10.7
     container_name: jellyfin
     environment:
       - PUID=1000
