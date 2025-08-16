@@ -1,6 +1,6 @@
 services:
   db:
-    image: docker.io/mariadb:10
+    image: docker.io/mariadb:10.11.13-ubi9
     container_name: seafile-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${INIT_SEAFILE_MYSQL_ROOT_PASSWORD:-}
@@ -32,7 +32,7 @@ services:
       - seafile-net
 
   seafile:
-    image: docker.io/seafileltd/seafile-mc:12.0-latest
+    image: docker.io/seafileltd/seafile-mc:13.0.8
     container_name: seafile
     ports:
       - "0.0.0.0:9999:80"
