@@ -12,7 +12,7 @@ services:
       - TZ=Europe/Berlin
 
   tunnel:
-    image: docker.io/cloudflare/cloudflared:2025.8.0
+    image: docker.io/cloudflare/cloudflared:2025.8.1
     restart: always
     command: tunnel run
     environment:
