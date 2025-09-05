@@ -13,6 +13,8 @@ services:
       - ${CONFIG_VOLUME_PATH}:/config
       - ${SERIES_VOLUME_PATH}:/data/tvshows
       - ${MOVIES_VOLUME_PATH}:/data/movies
+      - ${EXT_MOVIES_VOLUME_PATH}:/data/moviesext
+      - ${EXT_SERIES_VOLUME_PATH}:/data/seriesext
     ports:
       - 8096:8096
       - 8920:8920 #optional
