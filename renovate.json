@@ -8,7 +8,6 @@
   "assignees": [
     "ip025"
   ],
-  "minimumReleaseAge": "7 days",
   "packageRules": [
     {
       "description": "Keep Mongo within major v4 in unifi stack",
