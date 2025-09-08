@@ -17,8 +17,11 @@ services:
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - stack.env
+    environment:
+      PGHOST: ${PGHOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   server:
     #build: ./backend/
