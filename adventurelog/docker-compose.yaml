@@ -4,7 +4,6 @@ services:
     image: ghcr.io/seanmorley15/adventurelog-frontend:latest
     container_name: adventurelog-frontend
     restart: unless-stopped
-    env_file: .env
     ports:
       - "${FRONTEND_PORT:-8015}:3000"
     depends_on:
@@ -14,7 +13,6 @@ services:
     image: tobi312/rpi-postgresql-postgis:15-3.3-alpine-arm
     container_name: adventurelog-db
     restart: unless-stopped
-    env_file: .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
@@ -23,7 +21,6 @@ services:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest
     container_name: adventurelog-backend
     restart: unless-stopped
-    env_file: .env
     ports:
       - "${BACKEND_PORT:-8016}:80"
     depends_on:
