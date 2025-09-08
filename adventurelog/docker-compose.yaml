@@ -1,7 +1,7 @@
 services:
   web:
     #build: ./frontend/
-    image: ghcr.io/seanmorley15/adventurelog-frontend:latest
+    image: ghcr.io/seanmorley15/adventurelog-frontend:v0.11.0
     container_name: adventurelog-frontend
     restart: unless-stopped
     ports:
@@ -10,7 +10,7 @@ services:
       - server
 
   db:
-    image: tobi312/rpi-postgresql-postgis:15-3.3-alpine-arm
+    image: postgis/postgis:16-3.5
     container_name: adventurelog-db
     restart: unless-stopped
     volumes:
@@ -18,7 +18,7 @@ services:
 
   server:
     #build: ./backend/
-    image: ghcr.io/seanmorley15/adventurelog-backend:latest
+    image: ghcr.io/seanmorley15/adventurelog-backend:v0.11.0
     container_name: adventurelog-backend
     restart: unless-stopped
     ports:
