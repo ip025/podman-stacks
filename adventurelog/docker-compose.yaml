@@ -8,6 +8,8 @@ services:
       - "${FRONTEND_PORT:-8015}:3000"
     depends_on:
       - server
+    env_file:
+      - stack.env
 
   db:
     image: postgis/postgis:16-3.5
@@ -15,6 +17,8 @@ services:
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - stack.env
 
   server:
     #build: ./backend/
@@ -27,6 +31,8 @@ services:
       - db
     volumes:
       - adventurelog_media:/code/media/
+    env_file:
+      - stack.env
 
 volumes:
   postgres_data:
