@@ -30,7 +30,7 @@ services:
     #           capabilities: [gpu]
 
   tunnel:
-    image: docker.io/cloudflare/cloudflared:2025.8.0
+    image: docker.io/cloudflare/cloudflared:2025.8.1
     restart: unless-stopped
     command: tunnel run
     environment:
