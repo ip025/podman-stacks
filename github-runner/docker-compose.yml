@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   worker:
-    image: myoung34/github-runner:2.328.0
+    image: myoung34/github-runner:2.329.0
     environment:
       REPO_URL: ${REPO_URL}
       RUNNER_NAME: ${RUNNER_NAME}
