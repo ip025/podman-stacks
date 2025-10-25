@@ -1,6 +1,6 @@
 services:
   memos:
-    image: docker.io/neosmemo/memos:0.25.1
+    image: docker.io/neosmemo/memos:0.25.2
     container_name: memos
     volumes:
       - data:/var/opt/memos
