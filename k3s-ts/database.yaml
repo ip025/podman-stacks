@@ -5,6 +5,6 @@ metadata:
   name: teamspeak-prod
 spec:
   name: teamspeak-prod
-  owner: teamspeak-prod
+  owner: app
   cluster:
     name: prod-db
