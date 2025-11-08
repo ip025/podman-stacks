@@ -29,9 +29,9 @@ spec:
       containers:
         - env:
             - name: TS3SERVER_DB_PLUGIN
-              value: ts3db_postgresql
+              value: ts3db_postgres
             - name: TS3SERVER_DB_SQLCREATEPATH
-              value: create_postgresql
+              value: create_postgres
             - name: TS3SERVER_DB_WAITUNTILREADY
               value: "30"
             - name: TS3SERVER_LICENSE
