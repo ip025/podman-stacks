@@ -24,7 +24,7 @@ spec:
       labels:
         io.kompose.service: teamspeak
     spec:
-      nodeName: oilstock
+      nodeName: whisperforge
       containers:
         - env:
             - name: TSSERVER_LICENSE_ACCEPTED
