@@ -16,7 +16,6 @@ spec:
     matchLabels:
       io.kompose.service: teamspeak
   strategy: {}
-  nodeName: oilstock
   template:
     metadata:
       annotations:
@@ -26,6 +25,7 @@ spec:
       labels:
         io.kompose.service: teamspeak
     spec:
+      nodeName: oilstock
       containers:
         - env:
             - name: TS3SERVER_DB_PLUGIN
