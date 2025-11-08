@@ -16,6 +16,7 @@ spec:
     matchLabels:
       io.kompose.service: teamspeak
   strategy: {}
+  nodeName: oilstock
   template:
     metadata:
       annotations:
