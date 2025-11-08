@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: teamspeak
   name: teamspeak
+  namespace: teamspeak
 spec:
   ports:
     - name: "9987"

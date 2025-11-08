@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: teamspeak
   name: teamspeak
+  namespace: teamspeak
 spec:
   replicas: 1
   selector:
@@ -41,5 +42,6 @@ spec:
       restartPolicy: Always
       volumes:
         - name: teamspeak-data
-          persistentVolumeClaim:
-            claimName: teamspeak-data
+          hostPath:
+            path: /opt/teamspeak6
+            type: DirectoryOrCreate
