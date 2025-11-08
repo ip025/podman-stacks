@@ -1,0 +1,10 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: teamspeak-prod
+spec:
+  name: teamspeak-prod
+  owner: teamspeak-prod
+  cluster:
+    name: prod-db
