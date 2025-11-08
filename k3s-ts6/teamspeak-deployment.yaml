@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: teamspeak
+  name: teamspeak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: teamspeak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: teamspeak
+    spec:
+      containers:
+        - env:
+            - name: TSSERVER_LICENSE_ACCEPTED
+              value: accept
+          image: teamspeaksystems/teamspeak6-server:v6.0.0-beta7
+          name: teamspeak-server
+          ports:
+            - containerPort: 9987
+              protocol: UDP
+            - containerPort: 30033
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/tsserver
+              name: teamspeak-data
+      restartPolicy: Always
+      volumes:
+        - name: teamspeak-data
+          persistentVolumeClaim:
+            claimName: teamspeak-data
