@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: teamspeak
+  name: teamspeak
+  namespace: teamspeak-prod
+spec:
+  ports:
+    - name: "9987"
+      port: 9987
+      protocol: UDP
+      targetPort: 9987
+      nodePort: 9987
+    - name: "10011"
+      port: 10011
+      targetPort: 10011
+      nodePort: 10011
+  selector:
+    io.kompose.service: teamspeak
+  type: NodePort
