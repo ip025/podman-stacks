@@ -23,14 +23,14 @@ spec:
         io.kompose.service: vikunja
     spec:
       containers:
-        - env:
-            - name: VIKUNJA_CORS_ENABLE
-              value: "true"
+        - name: vikunja
+          env:
+            VIKUNJA_CORS_ENABLE: "true"
+            VIKUNJA_DATABASE_TYPE: "mysql"
           envFrom:
           - secretRef:
               name: vikunja-secrets
           image: docker.io/vikunja/vikunja:0.24.6
-          name: vikunja
           ports:
             - containerPort: 3456
               protocol: TCP
