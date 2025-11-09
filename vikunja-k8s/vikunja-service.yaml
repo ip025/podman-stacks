@@ -9,7 +9,7 @@ metadata:
   name: vikunja
 spec:
   ports:
-    - name: "3456"
+    - name: "http"
       port: 3456
       targetPort: 3456
   selector:

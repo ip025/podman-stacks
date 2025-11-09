@@ -25,6 +25,9 @@ spec:
       containers:
         - image: docker.io/neosmemo/memos:0.25.1
           name: memos
+          env:
+            - name: MEMOS_PORT
+              value: "5230"
           ports:
             - containerPort: 5230
               protocol: TCP

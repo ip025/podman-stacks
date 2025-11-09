@@ -9,8 +9,9 @@ metadata:
   name: memos
 spec:
   ports:
-    - name: "5230"
+    - name: "http"
       port: 5230
       targetPort: 5230
+      protocol: TCP
   selector:
     io.kompose.service: memos
