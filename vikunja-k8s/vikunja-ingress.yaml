@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: todo.k8s.klingelstaender.uk
+  - host: todo.klingelstaender.uk
     http:
       paths:
       - backend:
@@ -24,6 +24,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - todo.k8s.klingelstaender.uk
     - todo.klingelstaender.uk
     secretName: vikunja-tls
