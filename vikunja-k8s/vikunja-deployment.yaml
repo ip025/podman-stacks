@@ -22,6 +22,7 @@ spec:
       labels:
         io.kompose.service: vikunja
     spec:
+      nodeName: bigman
       containers:
         - name: vikunja
           env:
