@@ -36,6 +36,13 @@ spec:
               protocol: UDP
             - containerPort: 30033
               protocol: TCP
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
           volumeMounts:
             - mountPath: /var/tsserver
               name: teamspeak-data
