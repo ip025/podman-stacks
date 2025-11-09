@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: vikunja
+  name: vikunja
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: vikunja
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: vikunja
+    spec:
+      containers:
+        - env:
+            - name: VIKUNJA_CORS_ENABLE
+              value: "true"
+          envFrom:
+          - secretRef:
+              name: vikunja-secrets
+          image: docker.io/vikunja/vikunja:0.24.6
+          name: vikunja
+          ports:
+            - containerPort: 3456
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/vikunja/files
+              name: files
+        - name: tunnel
+          env:
+          - name: TUNNEL_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vikunja-secrets
+                key: TUNNEL_TOKEN
+          image: docker.io/cloudflare/cloudflared:2025.10.0
+      restartPolicy: Always
+      volumes:
+        - name: files
+          persistentVolumeClaim:
+            claimName: files
