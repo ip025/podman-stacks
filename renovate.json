@@ -3,7 +3,10 @@
     "config:recommended"
   ],
   "enabledManagers": [
-    "docker-compose"
+    "docker-compose",
+    "helm",
+    "kubernetes",
+    "cd"
   ],
   "assignees": [
     "ip025"
