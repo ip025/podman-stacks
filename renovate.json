@@ -4,9 +4,7 @@
   ],
   "enabledManagers": [
     "docker-compose",
-    "helm",
-    "kubernetes",
-    "cd"
+    "kubernetes"
   ],
   "assignees": [
     "ip025"
