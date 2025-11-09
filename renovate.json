@@ -8,6 +8,9 @@
   "assignees": [
     "ip025"
   ],
+  "ignorePaths": [
+    "deprecated/**"
+  ],
   "packageRules": [
     {
       "description": "Keep Mongo within major v4 in unifi stack",
