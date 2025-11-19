@@ -6,6 +6,9 @@
     "docker-compose",
     "kubernetes"
   ],
+  "kubernetes": {
+    "managerFilePatterns": ["/\\.yaml$/"]
+  },
   "assignees": [
     "ip025"
   ],
