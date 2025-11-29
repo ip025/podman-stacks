@@ -6,9 +6,8 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.37.0 (HEAD)
   labels:
-    io.kompose.service: teamspeak
-  name: teamspeak
-  namespace: teamspeak
+    io.kompose.service: teamspeak-heatwave
+  name: teamspeak-heatwave
 spec:
   ports:
     - name: voice
@@ -24,5 +23,5 @@ spec:
       port: 10080
       targetPort: 10080
   selector:
-    io.kompose.service: teamspeak
+    io.kompose.service: teamspeak-heatwave
   type: NodePort

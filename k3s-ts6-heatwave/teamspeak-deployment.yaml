@@ -6,14 +6,13 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.37.0 (HEAD)
   labels:
-    io.kompose.service: teamspeak
-  name: teamspeak
-  namespace: teamspeak
+    io.kompose.service: teamspeak-heatwave
+  name: teamspeak-heatwave
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: teamspeak
+      io.kompose.service: teamspeak-heatwave
   strategy:
     type: Recreate
   template:
@@ -22,7 +21,7 @@ spec:
         kompose.cmd: kompose convert
         kompose.version: 1.37.0 (HEAD)
       labels:
-        io.kompose.service: teamspeak
+        io.kompose.service: teamspeak-heatwave
     spec:
       nodeName: oilstock
       containers:
