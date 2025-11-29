@@ -11,15 +11,18 @@ metadata:
   namespace: teamspeak
 spec:
   ports:
-    - name: "9987"
+    - name: voice
       port: 9987
       protocol: UDP
       targetPort: 9987
       nodePort: 9987
-    - name: "30033"
+    - name: filetransfer
       port: 30033
       targetPort: 30033
       nodePort: 30033
+    - name: webquery
+      port: 10080
+      targetPort: 10080
   selector:
     io.kompose.service: teamspeak
   type: NodePort

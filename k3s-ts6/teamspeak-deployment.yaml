@@ -27,6 +27,7 @@ spec:
       nodeName: whisperforge
       containers:
         - env:
+            # reference: https://github.com/teamspeak/teamspeak6-server/blob/main/CONFIG.md
             - name: TSSERVER_LICENSE_ACCEPTED
               value: accept
           image: teamspeaksystems/teamspeak6-server:v6.0.0-beta7
@@ -35,6 +36,8 @@ spec:
             - containerPort: 9987
               protocol: UDP
             - containerPort: 30033
+              protocol: TCP
+            - containerPort: 10080
               protocol: TCP
           resources:
             requests:
