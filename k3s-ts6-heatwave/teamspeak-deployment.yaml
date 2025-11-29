@@ -1,0 +1,84 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: teamspeak
+  name: teamspeak
+  namespace: teamspeak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: teamspeak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: teamspeak
+    spec:
+      nodeName: oilstock
+      containers:
+        - env:
+            # reference: https://github.com/teamspeak/teamspeak6-server/blob/main/CONFIG.md
+            - name: TSSERVER_LICENSE_ACCEPTED
+              value: accept
+            - name: TSSERVER_DATABASE_PLUGIN
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_plugin
+            - name: TSSERVER_DATABASE_SQL_CREATE_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_sql_create_path
+            - name: TSSERVER_DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_host
+            - name: TSSERVER_DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_port
+            - name: TSSERVER_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_name
+            - name: TSSERVER_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_username
+            - name: TSSERVER_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: teamspeak-secret
+                  key: database_password
+          image: teamspeaksystems/teamspeak6-server:v6.0.0-beta7
+          name: teamspeak-server
+          ports:
+            - containerPort: 9987
+              protocol: UDP
+            - containerPort: 30033
+              protocol: TCP
+            - containerPort: 10080
+              protocol: TCP
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+      restartPolicy: Always
