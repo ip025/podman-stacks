@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: heatwave-telegram-exporter
+spec:
+  schedule: "0 2 * * 0"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mysqldump-telegram
+            image: your-custom-image/mysqldump-curl:latest # <-- CHANGE THIS
+            # If you must use mysql:8.0, you might need to install 'curl' first.
+            # image: mysql:8.0 
+            command: ["/bin/bash", "-c"] # Use bash for the complex logic
+            args:
+              - >
+                # Check for curl and tar availability (best practice)
+                if ! command -v curl >/dev/null || ! command -v tar >/dev/null; then
+                  echo "Error: curl or tar not found. Exiting.";
+                  exit 1;
+                fi;
+
+                DATE=$(date +%Y-%m-%d);
+                DB_LIST=$(echo $TARGET_DATABASES | tr "," " ");
+                
+                for DB in $DB_LIST; do
+                  TEMP_SQL_FILE="/tmp/${DB}.sql";
+                  ARCHIVE_FILE="/tmp/${DB}-${DATE}.tar.gz";
+
+                  echo "Starting dump for $DB...";
+
+                  # 1. Dump the database to a temporary file
+                  mysqldump -h $DB_HOST -u $DB_USER -p$DB_PASSWORD --databases $DB > $TEMP_SQL_FILE;
+
+                  # Check if dump succeeded before proceeding
+                  if [ $? -ne 0 ]; then
+                    echo "Dump for $DB failed. Skipping upload.";
+                    continue;
+                  fi;
+
+                  # 2. Archive the dump file
+                  tar -czf $ARCHIVE_FILE -C /tmp $(basename $TEMP_SQL_FILE);
+                  
+                  echo "Archiving complete. Uploading $ARCHIVE_FILE to Telegram...";
+
+                  # 3. Send the archive via Telegram API (sendDocument)
+                  # -s suppresses progress meters, -F defines form fields
+                  curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendDocument" \
+                       -F chat_id="${TG_CHAT_ID}" \
+                       -F document=@"$ARCHIVE_FILE" \
+                       -F caption="Weekly K8s Backup: $DB on $DATE"
+
+                  echo "Upload finished. Cleaning up files...";
+
+                  # 4. Cleanup
+                  rm -f $TEMP_SQL_FILE $ARCHIVE_FILE;
+                done;
+                echo "All database operations completed.";
+            env:
+            # Database Credentials
+            - name: TARGET_DATABASES
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: databases }}
+            - name: DB_HOST
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: host }}
+            - name: DB_USER
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: username }}
+            - name: DB_PASSWORD
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: password }}
+            
+            # Telegram Credentials
+            - name: TG_TOKEN
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: token }}
+            - name: TG_CHAT_ID
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: chat-id }}
+
+          restartPolicy: OnFailure
