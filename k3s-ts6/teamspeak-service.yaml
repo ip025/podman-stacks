@@ -10,6 +10,7 @@ metadata:
   name: teamspeak
   namespace: teamspeak
 spec:
+  externalTrafficPolicy: Local
   ports:
     - name: voice
       port: 9987
