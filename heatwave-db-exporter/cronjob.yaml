@@ -13,14 +13,14 @@ spec:
             image: docker.io/mysql:9.5 # <-- CHANGE THIS
             # If you must use mysql:8.0, you might need to install 'curl' first.
             # image: mysql:8.0 
-            command: ["/bin/bash", "-c"] # Use bash for the complex logic
+            command: ["/bin/bsh", "-c"] # Use bash for the complex logic
             args:
               - >
                 # Check for curl and tar availability (best practice)
-                if ! command -v curl >/dev/null || ! command -v tar >/dev/null; then
-                  echo "Error: curl or tar not found. Exiting.";
-                  exit 1;
-                fi;
+                # if ! command -v curl >/dev/null || ! command -v tar >/dev/null; then
+                #   echo "Error: curl or tar not found. Exiting.";
+                #   exit 1;
+                # fi;
 
                 DATE=$(date +%Y-%m-%d);
                 DB_LIST=$(echo $TARGET_DATABASES | tr "," " ");
