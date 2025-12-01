@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: mysqldump-telegram
-            image: your-custom-image/mysqldump-curl:latest # <-- CHANGE THIS
+            image: docker.io/mysql:9.5 # <-- CHANGE THIS
             # If you must use mysql:8.0, you might need to install 'curl' first.
             # image: mysql:8.0 
             command: ["/bin/bash", "-c"] # Use bash for the complex logic
