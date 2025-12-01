@@ -13,7 +13,7 @@ spec:
             image: docker.io/mysql:9.5 # <-- CHANGE THIS
             # If you must use mysql:8.0, you might need to install 'curl' first.
             # image: mysql:8.0 
-            command: ["/bin/bsh", "-c"] # Use bash for the complex logic
+            command: ["/bin/bash", "-c"] # Use bash for the complex logic
             args:
               - >
                 # Check for curl and tar availability (best practice)
