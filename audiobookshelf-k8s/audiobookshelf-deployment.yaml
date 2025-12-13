@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: audiobookshelf
+  name: audiobookshelf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: audiobookshelf
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: audiobookshelf
+    spec:
+      nodeName: albertman-x555lb
+      containers:
+        - args:
+            - tunnel
+            - run
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: audiobookshelf-app
+                  key: cf_tunnel_token
+          image: docker.io/cloudflare/cloudflared:2025.11.1
+          name: cloudflare-tunnel
+        - env:
+            - name: TZ
+              value: Europe/Berlin
+          image: ghcr.io/advplyr/audiobookshelf:2.25.1 
+          name: audiobookshelf
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /audiobooks
+              name: audiobooks
+            - mountPath: /podcasts
+              name: podcasts
+            - mountPath: /config
+              name: config
+            - mountPath: /metadata
+              name: metadata
+      restartPolicy: Always
+      volumes:
+        - name: audiobooks
+          hostPath:
+            path: /home/al/workspace/audiobookshelf/audiobooks
+            type: Directory
+        - name: podcasts
+          hostPath:
+            path: /home/al/workspace/audiobookshelf/podcasts
+            type: Directory
+        - name: config
+          hostPath:
+            path: /home/al/workspace/audiobookshelf/config
+            type: Directory
+        - name: metadata
+          hostPath:
+            path: /home/al/workspace/audiobookshelf/metadata
+            type: Directory
