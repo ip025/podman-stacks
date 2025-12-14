@@ -26,7 +26,12 @@ spec:
       containers:
         - args:
             - tunnel
+            - --no-autoupdate
+            - --protocol
+            - http2
             - run
+            - --token
+            - $(TUNNEL_TOKEN)
           env:
             - name: TUNNEL_TOKEN
               valueFrom:
