@@ -47,7 +47,7 @@ spec:
         - env:
             - name: TZ
               value: Europe/Berlin
-          image: ghcr.io/advplyr/audiobookshelf:2.25.1 
+          image: ghcr.io/advplyr/audiobookshelf:2.31.0 
           name: audiobookshelf
           ports:
             - containerPort: 80
