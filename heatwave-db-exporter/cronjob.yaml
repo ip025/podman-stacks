@@ -75,6 +75,6 @@ spec:
             - name: HEALTHCHECK1_URL
               valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: healthcheck1_url }}
             - name: HEALTHCHECK2_URL
-              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: healthcheck1_url }}
+              valueFrom: { secretKeyRef: { name: mysql-backup-creds, key: healthcheck2_url }}
 
           restartPolicy: OnFailure
