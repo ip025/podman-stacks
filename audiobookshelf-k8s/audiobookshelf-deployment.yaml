@@ -23,6 +23,10 @@ spec:
         io.kompose.service: audiobookshelf
     spec:
       nodeName: albertman-x555lb
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 1.1.1.1
       containers:
         - args:
             - tunnel
