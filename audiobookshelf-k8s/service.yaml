@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: audiobookshelf-cluster-ip
+  name: audiobookshelf
 spec:
   selector:
     app: audiobookshelf
