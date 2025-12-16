@@ -28,22 +28,22 @@ spec:
         nameservers:
           - 1.1.1.1
       containers:
-        - args:
-            - tunnel
-            - --no-autoupdate
-            - --protocol
-            - http2
-            - run
-            - --token
-            - $(TUNNEL_TOKEN)
-          env:
-            - name: TUNNEL_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: audiobookshelf-app
-                  key: cf_tunnel_token
-          image: docker.io/cloudflare/cloudflared:2025.11.1
-          name: cloudflare-tunnel
+        # - args:
+        #     - tunnel
+        #     - --no-autoupdate
+        #     - --protocol
+        #     - http2
+        #     - run
+        #     - --token
+        #     - $(TUNNEL_TOKEN)
+        #   env:
+        #     - name: TUNNEL_TOKEN
+        #       valueFrom:
+        #         secretKeyRef:
+        #           name: audiobookshelf-app
+        #           key: cf_tunnel_token
+        #   image: docker.io/cloudflare/cloudflared:2025.11.1
+        #   name: cloudflare-tunnel
         - env:
             - name: TZ
               value: Europe/Berlin
