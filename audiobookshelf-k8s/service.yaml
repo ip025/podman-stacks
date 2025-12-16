@@ -5,7 +5,7 @@ metadata:
   name: audiobookshelf
 spec:
   selector:
-    app: audiobookshelf
+    io.kompose.service: audiobookshelf
   ports:
     - name: http
       port: 80
