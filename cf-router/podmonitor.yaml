@@ -1,0 +1,15 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cf-tunnel
+  namespace: kube-system
+  labels:
+    release: monitoring
+    app: cloudflared
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared
+  podMetricsEndpoints:
+  - port: metrics
