@@ -33,7 +33,7 @@ spec:
           envFrom:
           - secretRef:
               name: vikunja-secrets
-          image: docker.io/vikunja/vikunja:0.24.6
+          image: docker.io/vikunja/vikunja:1.0.0-rc3
           ports:
             - containerPort: 3456
               protocol: TCP
