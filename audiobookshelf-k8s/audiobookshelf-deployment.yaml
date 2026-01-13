@@ -22,7 +22,7 @@ spec:
       labels:
         io.kompose.service: audiobookshelf
     spec:
-      nodeName: albertman-x555lb
+      nodeName: debianman
       dnsPolicy: "None"
       dnsConfig:
         nameservers:
@@ -65,17 +65,17 @@ spec:
       volumes:
         - name: audiobooks
           hostPath:
-            path: /home/al/workspace/audiobookshelf/audiobooks
+            path: /mnt/qnap/audiobookshelf/audiobooks
             type: Directory
         - name: podcasts
           hostPath:
-            path: /home/al/workspace/audiobookshelf/podcasts
+            path: /mnt/qnap/audiobookshelf/podcasts
             type: Directory
         - name: config
           hostPath:
-            path: /home/al/workspace/audiobookshelf/config
+            path: /mnt/qnap/audiobookshelf/config
             type: Directory
         - name: metadata
           hostPath:
-            path: /home/al/workspace/audiobookshelf/metadata
+            path: /mnt/qnap/audiobookshelf/metadata
             type: Directory
