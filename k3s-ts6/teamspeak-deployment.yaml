@@ -30,7 +30,7 @@ spec:
             # reference: https://github.com/teamspeak/teamspeak6-server/blob/main/CONFIG.md
             - name: TSSERVER_LICENSE_ACCEPTED
               value: accept
-          image: teamspeaksystems/teamspeak6-server:v6.0.0-beta7
+          image: teamspeaksystems/teamspeak6-server:v6.0.0-beta8
           name: teamspeak-server
           ports:
             - containerPort: 9987
