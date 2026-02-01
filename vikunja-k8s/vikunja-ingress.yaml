@@ -2,12 +2,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/duration: 200h
-    cert-manager.io/private-key-size: "4096"
-    cert-manager.io/renew-before: 144h
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  # annotations:
+  #   cert-manager.io/cluster-issuer: letsencrypt-prod
+  #   cert-manager.io/duration: 200h
+  #   cert-manager.io/private-key-size: "4096"
+  #   cert-manager.io/renew-before: 144h
+  #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: vikunja
 spec:
   ingressClassName: traefik
