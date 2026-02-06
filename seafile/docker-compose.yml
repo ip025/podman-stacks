@@ -32,7 +32,7 @@ services:
       - seafile-net
 
   seafile:
-    image: docker.io/seafileltd/seafile-mc:13.0.15
+    image: docker.io/seafileltd/seafile-mc:13.0.18
     container_name: seafile
     ports:
       - "0.0.0.0:9999:80"
