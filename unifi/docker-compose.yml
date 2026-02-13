@@ -2,7 +2,7 @@
 version: "3"
 services:
     unifi-network-application:
-        image: lscr.io/linuxserver/unifi-network-application:10.1.84
+        image: lscr.io/linuxserver/unifi-network-application:10.1.85
         container_name: unifi-network-application
         depends_on:
             - unifi-db
