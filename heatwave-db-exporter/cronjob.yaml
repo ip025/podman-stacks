@@ -11,7 +11,7 @@ spec:
           nodeName: whisperforge
           containers:
           - name: mysqldump-telegram
-            image: docker.io/mysql:9.6
+            image: docker.io/mysql:9.7
             command: ["/bin/bash", "-c"]
             args:
               - >
