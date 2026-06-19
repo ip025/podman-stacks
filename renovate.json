@@ -19,33 +19,38 @@
   "packageRules": [
     {
       "description": "Pin PostgreSQL major version",
+      "matchManagers": ["docker-compose", "kubernetes"],
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["postgres", "postgis/postgis"],
+      "matchPackagePatterns": ["postgres$", "postgis/postgis"],
       "allowedVersions": "<17.0.0"
     },
     {
       "description": "Pin MariaDB major version",
+      "matchManagers": ["docker-compose", "kubernetes"],
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["mariadb"],
+      "matchPackagePatterns": ["mariadb$"],
       "allowedVersions": "<12.0.0"
     },
     {
       "description": "Pin MySQL major version",
+      "matchManagers": ["docker-compose", "kubernetes"],
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["mysql"],
+      "matchPackagePatterns": ["mysql$"],
       "allowedVersions": "<10.0.0"
     },
     {
       "description": "Keep MongoDB within major v4 for unifi stack",
+      "matchManagers": ["docker-compose"],
       "matchDatasources": ["docker"],
       "matchPaths": ["unifi/**"],
-      "matchPackageNames": ["mongo"],
+      "matchPackagePatterns": ["mongo$"],
       "allowedVersions": "<5.0.0"
     },
     {
       "description": "Pin Memcached major version",
+      "matchManagers": ["docker-compose", "kubernetes"],
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["memcached"],
+      "matchPackagePatterns": ["memcached$"],
       "allowedVersions": "<2.0.0"
     },
     {
@@ -57,7 +62,7 @@
     {
       "description": "Auto-merge patch updates for non-database images",
       "matchUpdateTypes": ["patch"],
-      "excludePackageNames": ["postgres", "postgis/postgis", "mariadb", "mysql", "mongo", "memcached", "redis"],
+      "excludePackagePatterns": ["postgres$", "postgis/postgis", "mariadb$", "mysql$", "mongo$", "memcached$", "redis$"],
       "automerge": true
     }
   ]
