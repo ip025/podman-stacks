@@ -1,4 +1,5 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
   ],
@@ -7,7 +8,7 @@
     "kubernetes"
   ],
   "kubernetes": {
-    "managerFilePatterns": ["/\\.yaml$/"]
+    "fileMatch": ["\\.yaml$", "\\.yml$"]
   },
   "assignees": [
     "ip025"
@@ -17,20 +18,47 @@
   ],
   "packageRules": [
     {
-      "description": "Keep Mongo within major v4 in unifi stack",
-      "matchManagers": [
-        "docker-compose"
-      ],
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPaths": [
-        "unifi/**"
-      ],
-      "matchPackageNames": [
-        "mongo"
-      ],
+      "description": "Pin PostgreSQL major version",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres", "postgis/postgis"],
+      "allowedVersions": "<17.0.0"
+    },
+    {
+      "description": "Pin MariaDB major version",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["mariadb"],
+      "allowedVersions": "<12.0.0"
+    },
+    {
+      "description": "Pin MySQL major version",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["mysql"],
+      "allowedVersions": "<10.0.0"
+    },
+    {
+      "description": "Keep MongoDB within major v4 for unifi stack",
+      "matchDatasources": ["docker"],
+      "matchPaths": ["unifi/**"],
+      "matchPackageNames": ["mongo"],
       "allowedVersions": "<5.0.0"
+    },
+    {
+      "description": "Pin Memcached major version",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["memcached"],
+      "allowedVersions": "<2.0.0"
+    },
+    {
+      "description": "Group all updates by their parent directory",
+      "matchManagers": ["docker-compose", "kubernetes"],
+      "groupName": "{{packageFileDir}}",
+      "groupSlug": "{{packageFileDir}}"
+    },
+    {
+      "description": "Auto-merge patch updates for non-database images",
+      "matchUpdateTypes": ["patch"],
+      "excludePackageNames": ["postgres", "postgis/postgis", "mariadb", "mysql", "mongo", "memcached", "redis"],
+      "automerge": true
     }
   ]
 }
