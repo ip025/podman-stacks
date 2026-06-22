@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: mumble
+  name: mumble
+  namespace: mumble
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mumble
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: mumble
+    spec:
+      nodeName: whisperforge
+      containers:
+        - env:
+            - name: MUMBLE_CONFIG_OPUSTHRESHOLD
+              value: "0"
+            - name: MUMBLE_CONFIG_MESSAGEBURST
+              value: "1"
+            - name: MUMBLE_CONFIG_MESSAGELIMIT
+              value: "1"
+            - name: MUMBLE_CONFIG_USERS
+              value: "100"
+            - name: MUMBLE_CONFIG_BANDWIDTH
+              value: "558000"
+          envFrom:
+            - secretRef:
+                name: mumble-secret
+          image: docker.io/mumblevoip/mumble-server:v1.5.735-2
+          name: mumble-server
+          ports:
+            - containerPort: 64738
+              protocol: TCP
+            - containerPort: 64738
+              protocol: UDP
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+          volumeMounts:
+            - mountPath: /data
+              name: mumble-data
+      restartPolicy: Always
+      volumes:
+        - name: mumble-data
+          hostPath:
+            path: /opt/mumble
+            type: DirectoryOrCreate
