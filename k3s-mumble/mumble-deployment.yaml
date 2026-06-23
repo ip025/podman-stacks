@@ -40,7 +40,7 @@ spec:
           envFrom:
             - secretRef:
                 name: mumble-secret
-          image: docker.io/mumblevoip/mumble-server:v1.5.735-2
+          image: docker.io/mumblevoip/mumble-server:v1.6.870-2
           name: mumble-server
           ports:
             - containerPort: 64738
