@@ -25,7 +25,7 @@ services:
       retries: 10
 
   memcached:
-    image: ${SEAFILE_MEMCACHED_IMAGE:-memcached:1.6.42}
+    image: ${SEAFILE_MEMCACHED_IMAGE:-memcached:1.6.44}
     container_name: seafile-memcached
     entrypoint: memcached -m 256
     networks:
