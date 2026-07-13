@@ -25,14 +25,14 @@ services:
       retries: 10
 
   memcached:
-    image: ${SEAFILE_MEMCACHED_IMAGE:-memcached:1.6.44}
+    image: ${SEAFILE_MEMCACHED_IMAGE:-memcached:1.6.45}
     container_name: seafile-memcached
     entrypoint: memcached -m 256
     networks:
       - seafile-net
 
   seafile:
-    image: docker.io/seafileltd/seafile-mc:13.0.24
+    image: docker.io/seafileltd/seafile-mc:13.0.25
     container_name: seafile
     ports:
       - "0.0.0.0:9999:80"
