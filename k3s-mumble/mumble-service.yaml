@@ -13,15 +13,15 @@ spec:
   externalTrafficPolicy: Local
   ports:
     - name: voice
-      port: 64738
+      port: 22222
       protocol: UDP
       targetPort: 64738
-      nodePort: 64738
+      nodePort: 22222
     - name: voice-tcp
-      port: 64738
+      port: 22222
       protocol: TCP
       targetPort: 64738
-      nodePort: 64738
+      nodePort: 22222
   selector:
     io.kompose.service: mumble
   type: NodePort
