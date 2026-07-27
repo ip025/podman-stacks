@@ -23,7 +23,7 @@ spec:
         io.kompose.service: memos
     spec:
       containers:
-        - image: docker.io/neosmemo/memos:0.29.1
+        - image: docker.io/neosmemo/memos:0.30.0
           name: memos
           env:
             - name: MEMOS_PORT
