@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: tailscale
   rules:
-  - host: todo.memos.tailbc382.ts.net
+  - host: todo.tailbc382.ts.net
     http:
       paths:
       - backend:
