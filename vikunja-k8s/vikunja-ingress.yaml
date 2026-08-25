@@ -2,7 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  # annotations:
+  annotations:
+    tailscale.com/proxy-group: ingress-proxies
   #   cert-manager.io/cluster-issuer: letsencrypt-prod
   #   cert-manager.io/duration: 200h
   #   cert-manager.io/private-key-size: "4096"
@@ -10,9 +11,9 @@ metadata:
   #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: vikunja
 spec:
-  ingressClassName: traefik
+  ingressClassName: tailscale
   rules:
-  - host: todo.klingelstaender.uk
+  - host: todo.memos.tailbc382.ts.net
     http:
       paths:
       - backend:
@@ -24,5 +25,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - todo.klingelstaender.uk
+    - todo.tailbc382.ts.net
     secretName: vikunja-tls
