@@ -31,7 +31,7 @@ spec:
             - name: TSSERVER_LICENSE_ACCEPTED
               value: accept
             - name: TSSERVER_METRICS_ENABLED
-              value: true
+              value: "true"
           image: teamspeaksystems/teamspeak6-server:6.0.0-beta13
           name: teamspeak-server
           ports:
