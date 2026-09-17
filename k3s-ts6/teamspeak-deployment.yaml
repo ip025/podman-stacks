@@ -32,6 +32,8 @@ spec:
               value: accept
             - name: TSSERVER_METRICS_ENABLED
               value: "true"
+            - name: TSSERVER_QUERY_SSH_ALLOW_GUEST
+              value: "0"
           image: teamspeaksystems/teamspeak6-server:6.0.0-beta13
           name: teamspeak-server
           ports:
