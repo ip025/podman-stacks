@@ -34,7 +34,7 @@ spec:
               value: "true"
             - name: TSSERVER_QUERY_SSH_ALLOW_GUEST
               value: "0"
-          image: teamspeaksystems/teamspeak6-server:6.0.0-beta13
+          image: teamspeaksystems/teamspeak6-server:6.0.0-beta13.1
           name: teamspeak-server
           ports:
             - containerPort: 9987
