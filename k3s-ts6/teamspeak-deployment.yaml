@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.37.0 (HEAD)
   labels:
-    io.kompose.service: teamspeak
+    app.kubernetes.io/name: teamspeak
+    app.kubernetes.io/instance: teamspeak
+    app.kubernetes.io/component: server
+    app.kubernetes.io/part-of: teamspeak
   name: teamspeak
   namespace: teamspeak
 spec:
@@ -18,10 +18,11 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.37.0 (HEAD)
       labels:
+        app.kubernetes.io/name: teamspeak
+        app.kubernetes.io/instance: teamspeak
+        app.kubernetes.io/component: server
+        app.kubernetes.io/part-of: teamspeak
         io.kompose.service: teamspeak
     spec:
       nodeName: whisperforge
@@ -31,6 +32,10 @@ spec:
             - name: TSSERVER_LICENSE_ACCEPTED
               value: accept
             - name: TSSERVER_METRICS_ENABLED
+              value: "true"
+            - name: TSSERVER_METRICS_IP
+              value: "0.0.0.0"
+            - name: TSSERVER_METRICS_VOICE
               value: "true"
             - name: TSSERVER_QUERY_SSH_ALLOW_GUEST
               value: "0"
@@ -42,6 +47,9 @@ spec:
             - containerPort: 30033
               protocol: TCP
             - containerPort: 10080
+              protocol: TCP
+            - containerPort: 9187
+              name: metrics
               protocol: TCP
           resources:
             requests:
