@@ -1,0 +1,6 @@
+apiVersion: v2
+name: splitpro
+description: A Helm chart for SplitPro (open source Splitwise alternative) backed by an external PostgreSQL database
+type: application
+version: 0.1.0
+appVersion: "v2.1.5"

@@ -1,0 +1,129 @@
+# Default values for splitpro.
+# This chart deploys ONLY the SplitPro application. PostgreSQL is expected to be
+# provided externally; configure it under `externalDatabase` below.
+
+replicaCount: 1
+revisionHistoryLimit: 3
+
+# Recreate is required because the uploads volume is ReadWriteOnce with a single replica.
+strategy: Recreate
+
+image:
+  repository: ossapps/splitpro
+  # Pinned on purpose; never use :latest. Falls back to Chart.appVersion when empty.
+  tag: v2.1.5
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Placement controls. nodeName pins the pod to a specific node (repo convention),
+# nodeSelector is the standard label-based alternative.
+nodeSelector: {}
+nodeName: ""
+affinity: {}
+tolerations: []
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 3000
+  annotations: {}
+
+# Generic ingress section. Disabled by default; set className/annotations/host for
+# Tailscale, Traefik, Cloudflare Tunnel, etc.
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: ""
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistent storage for uploaded receipts (/app/uploads).
+persistence:
+  uploads:
+    enabled: true
+    # Set to reuse a pre-existing PVC instead of letting the chart create one.
+    existingClaim: ""
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClass: ""
+    annotations: {}
+
+# --- External PostgreSQL (this chart deploys no database) ---
+# NOTE: recurring transactions require the pg_cron extension to be available on
+# the external database.
+externalDatabase:
+  host: ""
+  port: 5432
+  database: splitpro
+  user: postgres
+  # Appended to DATABASE_URL as a query string, e.g. { sslmode: require }
+  parameters: {}
+
+# --- Required pre-existing Secret ---
+# The chart never creates a Secret. Create it out-of-band and make sure its keys
+# match the environment variable names, e.g.:
+#   kubectl create secret generic splitpro-secrets \
+#     --from-literal=POSTGRES_PASSWORD='...' \
+#     --from-literal=NEXTAUTH_SECRET='...'
+# Recognized keys: POSTGRES_PASSWORD, NEXTAUTH_SECRET, EMAIL_SERVER_PASSWORD,
+# GOCARDLESS_SECRET_ID, GOCARDLESS_SECRET_KEY, PLAID_SECRET, GOOGLE_CLIENT_SECRET,
+# AUTHENTIK_SECRET, KEYCLOAK_SECRET, OIDC_CLIENT_SECRET, WEB_PUSH_PRIVATE_KEY,
+# OPEN_EXCHANGE_RATES_APP_ID, DISCORD_WEBHOOK_URL.
+existingSecret: ""
+
+# --- Non-secret configuration, rendered into a ConfigMap and loaded via envFrom ---
+# Any non-secret variable from SplitPro's .env.example can be added here. Keys that
+# are omitted stay unset, so unconfigured optional providers are not treated as enabled.
+config:
+  NEXTAUTH_URL: ""
+  DEFAULT_HOMEPAGE: "/home"
+  ENABLE_SENDING_INVITES: "false"
+  DISABLE_EMAIL_SIGNUP: "false"
+  CLEAR_CACHE_CRON_RULE: "0 2 * * 0"
+  CACHE_RETENTION_INTERVAL: "2 days"
+  CURRENCY_RATE_PROVIDER: "frankfurter"
+  UPLOAD_MAX_FILE_SIZE_MB: "10"
+  # Examples of optional non-secret variables:
+  # NEXTAUTH_URL_INTERNAL: "http://splitpro:3000"
+  # OAUTH_AUTO_REDIRECT: "false"
+  # FROM_EMAIL: "SplitPro <no-reply@example.com>"
+  # EMAIL_SERVER_HOST: "smtp.example.com"
+  # EMAIL_SERVER_PORT: "587"
+  # EMAIL_SERVER_USER: "smtp-user"
+  # EMAIL_TLS_REJECT_UNAUTHORIZED: "1"
+  # GOOGLE_CLIENT_ID: "..."
+  # AUTHENTIK_ID: "..."
+  # AUTHENTIK_ISSUER: "https://authentik.example.com/application/o/splitpro"
+  # KEYCLOAK_ID: "..."
+  # KEYCLOAK_ISSUER: "https://keycloak.example.com/realms/My_Realm"
+  # OIDC_NAME: "..."
+  # OIDC_CLIENT_ID: "..."
+  # OIDC_WELL_KNOWN_URL: "https://example.com/.well-known/openid-configuration"
+  # WEB_PUSH_PUBLIC_KEY: "..."
+  # WEB_PUSH_EMAIL: "..."
+  # FEEDBACK_EMAIL: "..."
+  # CURRENCY_RATE_PROVIDER: "frankfurter"
+
+# Extra plain environment variables as a map.
+env: {}
+# Extra full env entries (name/value/valueFrom) appended verbatim.
+extraEnv: []
+# Extra envFrom sources.
+extraEnvFrom: []
+
+resources: {}
+
+# SplitPro does not document a health endpoint, so probes are opt-in.
+livenessProbe: {}
+readinessProbe: {}
