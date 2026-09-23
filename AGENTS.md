@@ -41,9 +41,13 @@ Homelab infrastructure-as-code: declarative configs for self-hosted services run
 - Add a new K8s stack: create `{name}-k8s/` with deployment + service + (ingress + pvc if needed). Use existing stacks as templates.
 - Deprecate a stack: move to `deprecated/{name}/`, no code changes needed.
 - Update an image version: let Renovate do it, or manually bump the tag in the compose/k8s file.
-- Validate YAML: `yamllint` or `podman compose config` / `kubectl apply --dry-run=client`.
 - Deploy compose: `podman compose -f <dir>/docker-compose.yml up -d`.
 - Deploy K8s: `kubectl apply -f <dir>/`.
+
+## Validation
+
+- **AI agents must not run any validation or verification steps on these manifests.**
+- **No `kubectl`** — not `apply`, `diff`, `--dry-run=client`, `get`, or any other subcommand.
 
 ## Reminders for AI agents
 
